@@ -1,0 +1,46 @@
+{% extends 'todo/base.html' %}
+{% block link %}
+{% endblock %}
+{% block title %}
+My lunch and dinner
+{% endblock %}
+
+{% block content %}
+<body>
+<h1>My menu (Lunch and dinner)</h1>
+<ol>
+{% for a in liste %}
+<li>
+  <form action="{% url 'todo:delete' a.id 0 %}" method="POST">
+{% csrf_token %}
+{{ a }}
+<input type="submit" value="Delete">
+
+<br></form>
+</li>
+{% endfor %}
+
+
+
+
+</ol>
+{% if liste.count != 14 %}
+<form action="{% url 'todo:add' 0 14 %}" method="POST">
+{% csrf_token %}
+{{ form.as_table }}
+
+<input class="btn btn-success" type="submit" value="Add">
+</form>
+
+
+{# if the number of dish input by the user equals to 14, we can go to the breakfast page #}
+{% else %}
+<form action="{% url 'todo:add' 1 7 %}" method="POST">
+{% csrf_token %}
+<input type="submit" value="Go to breakfast page">
+
+</form>
+{% endif %}
+
+</body>
+{% endblock %}

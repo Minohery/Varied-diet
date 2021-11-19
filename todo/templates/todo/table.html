@@ -1,0 +1,34 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}
+My menu
+{% endblock %}
+
+{% block content %}
+{% for i in new_L %}
+<table>
+<thead><tr>
+  <th>Monday</th>
+  <th>Tuesday</th>
+  <th>Wednesday</th>
+  <th>Thursday</th>
+  <th>Friday</th>
+  <th>Saturday</th>
+  <th>Sunday</th></tr>
+</thead>
+<tbody>
+  <tr>
+    {% for j in i %}
+  <td>{{ j }}</td>
+    {% if forloop.counter == 7 or forloop.counter == 14 %}
+    </tr><tr>
+    {% endif %}
+
+  {% endfor %}
+  </tr></tbody>
+  </table>
+  <br>
+  <br>
+{% endfor %}
+
+{% endblock %}

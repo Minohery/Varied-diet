@@ -1,0 +1,45 @@
+{% extends 'todo/base.html' %}
+{% block title %}
+My breakfast
+{% endblock %}
+
+{% block content %}
+<body>
+<h1>My menu (breakfast)</h1>
+<ol>
+{% for a in liste %}
+<li>
+  <form action="{% url 'todo:delete' a.id 1 %}" method="POST">
+{% csrf_token %}
+{{ a }}
+<input type="submit" value="Delete">
+
+<br></form>
+</li>
+{% endfor %}
+
+
+
+
+</ol>
+{% if liste.count != 7 %}
+<form action="{% url 'todo:add' 1 7 %}" method="POST">
+{% csrf_token %}
+{{ form.as_table }}
+
+<input type="submit" value="Add">
+</form>
+
+
+{# if the number of dish input by the user equals to 7, we can draw the table #}
+{% else %}
+<form action="{% url 'todo:draw' %}" method="POST">
+{% csrf_token %}
+{{ forme2 }}
+<input type="submit" value="Go to table">
+
+</form>
+{% endif %}
+
+</body>
+{% endblock %}
